@@ -51,19 +51,15 @@ public class DataLoader implements CommandLineRunner {
 
         SalesOrder order = new SalesOrder();
         order.setClientName("Vance Refrigeration!");
-        Set<Paper> papers = new HashSet<>();
-        papers.add(copyPaper);
-        papers.add(cardStock);
-        order.setPapers(papers);
+        order.addPaper(copyPaper);
+        order.addPaper(cardStock);
         order.setBranch(stamfordBranch);
         salesOrderRepository.save(order);
 
         SalesOrder order2 = new SalesOrder();
-        order.setClientName("Gabe Lewis Inc.");
-        Set<Paper> papers2 = new HashSet<>();
-        papers.add(copyPaper);
-        order.setPapers(papers2);
-        order.setBranch(stamfordBranch);
+        order2.setClientName("Gabe Lewis Inc.");
+        order2.addPaper(copyPaper);
+        order2.setBranch(stamfordBranch);
         salesOrderRepository.save(order2);
 
     }

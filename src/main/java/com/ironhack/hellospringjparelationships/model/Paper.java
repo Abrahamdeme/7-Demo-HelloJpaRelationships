@@ -3,6 +3,9 @@ package com.ironhack.hellospringjparelationships.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,6 +19,21 @@ public class Paper {
     @Enumerated(EnumType.STRING)
     private PaperType paperType;
 
+
     @ManyToMany(mappedBy = "papers")
-    private Set<SalesOrder> salesOrders;
+    private Set<SalesOrder> salesOrders = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Paper{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + paperType + '\'' +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

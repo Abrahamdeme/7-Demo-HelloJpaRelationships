@@ -3,6 +3,7 @@ package com.ironhack.hellospringjparelationships.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,5 +27,15 @@ public class SalesOrder {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "paper_id")
     )
-    private Set<Paper> papers;
+    private Set<Paper> papers = new HashSet<>();
+
+    public void addPaper(Paper paper) {
+        this.papers.add(paper);
+        paper.getSalesOrders().add(this);
+    }
+
+    public void removePaper(Paper paper) {
+        this.papers.remove(paper);
+        paper.getSalesOrders().remove(this);
+    }
 }
